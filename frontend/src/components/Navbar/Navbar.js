@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
+import { GlobalState } from '../../GlobalState';
 
 const NavbarStyled = styled.nav`
   display: flex;
+  width: auto;
   justify-content: space-between;
   align-items: center;
   background: radial-gradient(
@@ -30,6 +32,8 @@ const NavbarStyled = styled.nav`
 `;
 
 const Navbar = () => {
+  const state = useContext(GlobalState);
+  console.log(state);
   return (
     <NavbarStyled>
       <div className='logo'>
@@ -45,6 +49,7 @@ const Navbar = () => {
         <li>
           <Link to='/login'>Login</Link>
         </li>
+
         <li>
           <Link to='/profile'>
             <FaUserCircle />

@@ -8,6 +8,8 @@ import Register from './components/auth/Register';
 import Home from './components/pages/Home/Home';
 import { Context } from './context/Context';
 import Profile from './components/pages/Home/Profile';
+import PrivateRoute from './components/PrivateRoutes/PrivateRoute';
+import Mail from './components/Mail/Mail';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -24,10 +26,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App = () => {
-  const { user } = useContext(Context);
-
-  console.log(user);
-
   return (
     <BrowserRouter>
       <GlobalStyle />
@@ -37,6 +35,7 @@ const App = () => {
         <Route path='/profile' component={Profile} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
+        <PrivateRoute path='/mail' component={Mail} />
       </Switch>
     </BrowserRouter>
   );

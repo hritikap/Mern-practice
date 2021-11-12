@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { GlobalState } from '../../GlobalState';
 import { AuthStyled } from './Auth';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const history = useHistory();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -16,8 +20,10 @@ const Login = () => {
       body: JSON.stringify({ email, password }),
     });
     try {
-      const res = await response.json();
-      console.log(res);
+      await response.json();
+      localStorage.setItem('firstLogin', true);
+      // history.push('/');
+      window.location.href = '/';
     } catch (err) {
       console.log(err);
     }
