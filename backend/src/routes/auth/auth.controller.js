@@ -29,15 +29,12 @@ const login = async (req, res) => {
         .json({ success: false, msg: 'either email or password is invalid' });
     }
 
-    const accessToken = createAccessToken({ id: user._id, email: user.email });
-    const refreshToken = createRefreshToken({
-      id: user._id,
-      email: user.email,
-    });
+    const accessToken = createAccessToken({ id: user.id });
+    const refreshToken = createRefreshToken({ id: user.id });
 
     res.cookie('refresh_token', refreshToken, {
       httpOnly: true,
-      path: 'auth/refresh_token',
+      path: 'api/auth/refreshToken',
     });
 
     return res.status(200).json({ success: true, accessToken });
@@ -69,7 +66,7 @@ const register = async (req, res) => {
 
     res.cookie('refresh_token', refreshToken, {
       httpOnly: true,
-      path: 'auth/refresh_token',
+      path: 'api/auth/refreshToken',
     });
 
     return res.status(200).json({ success: true, accessToken });
@@ -92,7 +89,7 @@ const logout = async (req, res) => {
 
 const refreshToken = (req, res) => {
   try {
-    const rf_token = req.cookies.refreshToken;
+    const rf_token = req.cookies.refresh_token;
     if (!rf_token) {
       return res.status(400).json({
         message: 'Please login or register',
@@ -102,8 +99,9 @@ const refreshToken = (req, res) => {
       if (err) {
         return res.status(400).json({ message: 'please login or register' });
       }
-      const accessToken = createAccessToken({ id: user._id });
-      res.json({ accessToken });
+      const accessToken = createAccessToken({ id: user.id });
+
+      return res.json({ accessToken });
     });
   } catch (err) {
     return res.status(500).json({ message: err.message });
