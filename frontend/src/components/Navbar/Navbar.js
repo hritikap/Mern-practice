@@ -32,8 +32,6 @@ const NavbarStyled = styled.nav`
 `;
 
 const Navbar = () => {
-  const state = useContext(GlobalState);
-  console.log(state);
   return (
     <NavbarStyled>
       <div className='logo'>

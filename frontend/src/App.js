@@ -6,10 +6,10 @@ import Navbar from './components/Navbar/Navbar';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Home from './components/pages/Home/Home';
-import { Context } from './context/Context';
 import Profile from './components/pages/Home/Profile';
-import PrivateRoute from './components/PrivateRoutes/PrivateRoute';
-import Mail from './components/Mail/Mail';
+import Sidebar from './components/Sidebar';
+import Inbox from './components/pages/Inbox';
+import Sent from './components/pages/Sent';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -30,12 +30,14 @@ const App = () => {
     <BrowserRouter>
       <GlobalStyle />
       <Navbar />
+      <Sidebar />
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/profile' component={Profile} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
-        <PrivateRoute path='/mail' component={Mail} />
+        <Route path='/inbox' component={Inbox} />
+        <Route path='/sent-mails' component={Sent} />
       </Switch>
     </BrowserRouter>
   );
